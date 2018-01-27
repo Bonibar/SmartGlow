@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SmartGlow</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+        <style>
+            .hidden{
+                display: none;
+            }
+            .slider{
+                -webkit-appearance: none;
+                appearance: none;
+                width: 100%;
+                height: 10px;
+                background: #e0e0e0;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+                border-radius: 5px;
+            }
+            .slider:hover {
+                opacity: 1;
+            }
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                border-radius: 10px;
+            }
+            .slider::-moz-range-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                border-radius: 10px;
+            }
+            .slider-manual::-webkit-slider-thumb{
+                background: #23d160;
+            }
+            .slider-manual::-moz-range-thumb{
+                background: #23d160;
+            }
+            .slider-auto::-webkit-slider-thumb{
+                background: #ffa75a;
+            }
+            .slider-auto::-moz-range-thumb{
+                background: #ffa75a;
+            }
+        </style>
+        <script>
+            function onCheckboxUpdate()
+            {
+                if (document.getElementById('autoadjust').checked)
+                {
+                    document.getElementById('brightnessLabel').textContent = "Desired room brightness";
+                    document.getElementById('autoadjust').value = 1;
+                    document.getElementById('brightnessSlider').className = "slider slider-auto";
+                    document.getElementById('brightnessSlider').value = [AUTOADJUST SLIDER VALUE];
+                } else {
+                    document.getElementById('brightnessLabel').textContent = "Lights brightness";
+                    document.getElementById('autoadjust').value = 0;
+                    document.getElementById('brightnessSlider').className = "slider slider-manual";
+                    document.getElementById('brightnessSlider').value = [BRIGHTNESS SLIDER VALUE];
+                }
+            }
+        </script>
+    </head>
+    <body style="background-color: #FAFAFA; width: 100vw; height: 100vh" onload="onCheckboxUpdate();">
+        <section class="section" style="background-color: #ffa75a">
+            <div class="container">
+                <h1 class="title" style="color: white; margin-bottom: 30px">
+                    SmartGlow
+                </h1>
+                <p class="subtitle">
+                    <strong style="color: white">Light Regulator</strong>
+                </p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <h1 class="title">
+                    Connection informations
+                </h1>
+                <form action="/configuration" method="post">
+                    <div class="field">
+                        <label class="label ">MQTT broker</label>
+                        <div class="control">
+                            <input class="input [MQTT INPUT STYLE]" type="text" placeholder="MQTT broker IP" value="[MQTT INPUT VALUE]" name="mqtt">
+                        </div>
+                        <p class="help is-danger">[MQTT DANGER TEXT]</p>
+                        <p class="help is-success">[MQTT SUCCESS TEXT]</p>
+                    </div>
+                    <div class="field" style="margin-top: 30px">
+                        <div class="control">
+                            <button class="button is-link" type="submit" style="background-color: #ffa45c">Connect</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="[SETTINGS SECTION STYLE]">
+            <div class="container">
+                <h1 class="title">
+                    System settings
+                </h1>
+                <form action="/settings" method="post">
+                    <div class="field">
+                        <input type="checkbox" id="autoadjust" style="margin-right: 5px" onclick="onCheckboxUpdate();" name="autoadjust" [AUTOADJUST CHECKBOX STATE]>
+                        <label for="autoadjust">Automatic light adjustment</label>
+                    </div>
+                    <div class="field">
+                        <label class="label" id="brightnessLabel">Lights brightness</label>
+                        <div class="control">
+                            <input id="brightnessSlider" class="slider" step="1" min="0" max="10000" type="range" name="brightness">
+                        </div>
+                    </div>
+                    <div class="field" style="margin-top: 30px">
+                        <div class="control">
+                            <button class="button is-link" type="submit" style="background-color: #ffa45c">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "smartglow-light-regulator",
+  "version": "0.0.0",
+  "description": "Light Regulator Service for the SmartGlow IoT project.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicolas LEQUAIN",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-formidable": "^1.0.0"
+  }
+}
